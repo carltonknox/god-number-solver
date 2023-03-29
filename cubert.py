@@ -156,9 +156,13 @@ class cubert:
                 
             for j in range(times):
                 self.moves[move_idx](dir)
-    
-    def __init__(self,seed=""):
-        self.cube=['w']*9+['o']*9+['g']*9+['r']*9+['b']*9+['y']*9
+                
+    def __init__(self,seed_or_cube=None):
         self.moves=[self.w_move,self.o_move,self.g_move,self.r_move,self.b_move,self.y_move]
-        
-        self.run_moves(seed)
+        self.cube=['w']*9+['o']*9+['g']*9+['r']*9+['b']*9+['y']*9
+        if seed_or_cube==None:
+            seed=""
+        if isinstance(seed_or_cube,str):
+            self.run_moves(seed_or_cube)
+        elif isinstance(seed_or_cube,cubert):
+            self.cube = seed_or_cube.cube.copy()
